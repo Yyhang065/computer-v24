@@ -1405,32 +1405,37 @@ function Enable_Cursor_Movement (en: boolean) {
 }
 function Music_Contents () {
     Music_Album_Art = sprites.create(img`
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        dddddddddddddddddddddd
-        ......................
-        ......................
-        ......................
-        ......................
-        ......................
-        ......................
+        ..ffffffffffffffffff..
+        .ffccccccccccccccccff.
+        ffccccccccccccccccccff
+        fccccccccccccccccccccf
+        fccccccccffffccccccccf
+        fccccccff1111ffccccccf
+        fcccccfb111111bfcccccf
+        fcccccf11111111fcccccf
+        fccccfd11111111dfccccf
+        fcc7cfd11111111dfccccf
+        fc7ccfd11111111dfccccf
+        fc7ccfd11111111dfccccf
+        fc7ccfddd1111dddffcccf
+        fc77cfbdbfddfbdbfcfccf
+        fc777fcdcf11fcdcfbfccf
+        fcc77fffbdb1bdffcfcccf
+        fccfcb1bcffffffccccccf
+        fccf1c1c1ffffffccccccf
+        fccfdfdfdfffffcccccccf
+        ffccfcfcfcccccccccccff
+        .ffccccccccccccccccff.
+        ..ffffffffffffffffff..
         `, SpriteKind.App_Window)
-    Music_Album_Art.top = Taskbar.bottom
-    Music_Album_Art.left = 0
+    Music_Album_Art.left = 4
+    Music_Album_Art.top = 20
     Music_Album_Art.z = 21
+    Music_Song_Name = textsprite.create("No Song Playing", 0, 15)
+    Music_Album_Art.left = 4
+    Music_Album_Art.top = 20
+    Music_Album_Art.z = 21
+    Music_Song_Name.setOutline(1, 0)
 }
 function Update_Cursor () {
     if (!(Cursor) || !(Cursor_Pointer)) {
@@ -1630,6 +1635,7 @@ function Make_Cursor () {
 let Pin = 0
 let Title_Bar: Sprite = null
 let Cursor: Sprite = null
+let Music_Song_Name: TextSprite = null
 let Music_Album_Art: Sprite = null
 let Files_Open: Sprite = null
 let Settings_Open: Sprite = null
@@ -1782,9 +1788,8 @@ scene.setBackgroundImage(img`
 Set_Pin = 0
 game.showLongText("Computer Simulation v2.4", DialogLayout.Bottom)
 game.showLongText("Press A to startup!", DialogLayout.Bottom)
-pauseUntil(() => controller.A.isPressed())
-Startup()
 Current_App = "None"
+Startup()
 game.onUpdate(function () {
     Update_Cursor()
 })
